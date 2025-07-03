@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use DateTimeInterface;
 
 class Note extends Model
@@ -25,6 +26,8 @@ class Note extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    use SoftDeletes;
 
     public function user()
     {
