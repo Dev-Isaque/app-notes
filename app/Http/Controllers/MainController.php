@@ -23,9 +23,17 @@ class MainController extends Controller
         return view("home", ['notes' => $notes]);
     }
 
+    public function edit(Request $request) {
+        return view('edit');
+    }
+
+    public function update(Request $request, Note $note) {
+        return redirect()->route('home');
+    }
+
     public function newNote()
     {
-        return view('new_note');
+        return view('notes/new_note');
     }
 
     public function newNoteSubmit(Request $request)
@@ -65,10 +73,14 @@ class MainController extends Controller
     {
         $id =  Operations::decryptId($id);
 
+        if ($id === null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
-        return view('edit_note', ['note' => $note]);
+        return view('notes/edit_note', ['note' => $note]);
     }
 
     public function editNoteSubmit(Request $request)
@@ -97,6 +109,10 @@ class MainController extends Controller
         // descrypt note_id
         $id = Operations::decryptId($request->note_id);
 
+        if ($id === null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
@@ -117,13 +133,17 @@ class MainController extends Controller
         $note = Note::find($id);
 
         // show delete note confirmation
-        return view('delete_note', ['note' => $note]);
+        return view('notes/delete_note', ['note' => $note]);
     }
 
     public function deleteNoteConfirm($id)
     {
         // check if id is encrypted
         $id = Operations::decryptId($id);
+
+        if ($id === null) {
+            return redirect()->route('home');
+        }
 
         // load note
         $note = Note::find($id);

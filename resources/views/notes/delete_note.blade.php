@@ -1,11 +1,11 @@
-@extends('layouts.main_layout')
+@extends('layouts.theme')
 @section('content')
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col">
 
-            @include('top_bar')
+            @include('layouts.top_bar')
 
             <div class="col card p-5 text-center">
                 <span class="display-3 mb-5"><i class="fa-solid fa-triangle-exclamation text-warning opacity-50"></i></span>

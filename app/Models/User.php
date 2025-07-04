@@ -13,7 +13,9 @@ class User extends Model
     const DELETED_AT = 'updated_at';
     protected $fillable = [
         'id',
-        'username',
+        'photo',
+        'name',
+        'email',
         'password',
         'last_login',
         'created_at',
